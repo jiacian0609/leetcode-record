@@ -3,6 +3,7 @@ class Solution:
         for word in wordDict:
             if word in s:
                 temp = s.split(word)
+                print(temp)
 
                 if all(len(t) == 0 for t in temp):
                     return True
