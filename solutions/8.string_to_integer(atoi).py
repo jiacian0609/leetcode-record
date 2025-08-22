@@ -6,7 +6,7 @@ class Solution:
             if len(ans) == 0 and ch == ' ' and sign is None: continue
             elif len(ans) == 0 and sign is None and (ch == '+' or ch == '-'):
                 sign = ch
-            elif not ch.isnumeric():
+            elif not ch.isdigit():
                 break
             else:
                 ans += ch
