@@ -44,3 +44,29 @@ class Solution:
                 provinces += 1     # 省份數 +1
         
         return provinces
+    
+    def findCircleNumUF(self, isConnected: List[List[int]]) -> int:
+        n = len(isConnected)
+        parent = [i for i in range(n)]  # 初始化每個節點的父節點是自己
+
+        # 查找父節點（帶路徑壓縮）
+        def find(x):
+            if parent[x] != x:
+                parent[x] = find(parent[x])
+            return parent[x]
+
+        # 合併兩個集合
+        def union(x, y):
+            rootX, rootY = find(x), find(y)
+            if rootX != rootY:
+                parent[rootY] = rootX   # 把 y 的根指向 x 的根
+
+        # 根據鄰接矩陣，把相連的城市合併
+        for i in range(n):
+            for j in range(i + 1, n):   # 只需要看上三角矩陣，避免重複
+                if isConnected[i][j] == 1:
+                    union(i, j)
+
+        # 統計有多少不同的根（即多少個省份）
+        provinces = len({find(i) for i in range(n)})
+        return provinces

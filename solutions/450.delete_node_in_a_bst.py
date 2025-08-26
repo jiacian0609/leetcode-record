@@ -28,4 +28,3 @@ class Solution:
         else:
             root.right = self.deleteNode(root.right, key)
         return root
-        
